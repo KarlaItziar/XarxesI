@@ -14,16 +14,17 @@ printf("Introdueix una funció en la forma explicita (ax^2+bx+c, sense espais i 
 fgets(segon_grau, sizeof(segon_grau), stdin);
 segon_grau[strcspn(segon_grau, "\n")] = '\0';
 
-char *posicio_x2 = strstr(segon_grau, "x^2"); // strstr() busca mes d'un caracter
+// char *posicio_x2 = strstr(segon_grau, "x^2"); // strstr() busca mes d'un caracter
 
-/*
 if (strncmp(segon_grau, "0x^2", 4) == 0) {
     if (segon_grau[4] == '+') {
         memmove(segon_grau, segon_grau + 5, strlen(segon_grau + 5) + 1);
     } else if (segon_grau[4] == '-') {
         memmove(segon_grau, segon_grau + 4, strlen(segon_grau + 4) + 1);
     }
-}*/
+}
+
+char *posicio_x2 = strstr(segon_grau, "x^2");
 
 if (posicio_x2 == NULL) { // Si no hi ha x^2, es de primer grau
 

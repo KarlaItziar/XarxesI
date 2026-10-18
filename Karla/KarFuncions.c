@@ -46,7 +46,7 @@ int llegirCoficientsIGrau(float *a, float *b, float *c) {
         if (posicio_x == NULL) {
             grau = 0;
         } else {
-            grau = 2; // S'ha trobat x^2, és de segon grau
+            grau = (termeA == 0.0f) ? 1 : 2; // Si a és 0, és de primer grau; si no, és de segon grau
 
             termeA = strtof(segon_grau, NULL); // Converteix el que hi ha abans de x^2 a float
             termeB = strtof(posicio_x2 + 3, NULL); // Converteix el que hi ha després de x^2 a float
@@ -66,25 +66,42 @@ float CalcularTallEixY(float a, float b, float c) {
 }
 
 float CalcularTallEixX(float a, float b, float c, float *tall_x1, float *tall_x2) {
+    if (a == 0.0f) {
+        if (b == 0.0f) {
+            return 0;
+        }
+
+        *tall_x1 = -c / b;
+        return 1;
+    }
+
     float arrel = b*b - 4*a*c;
 
     if (arrel > 0) {
         *tall_x1 = (-b + sqrt(arrel)) / (2*a);
         *tall_x2 = (-b - sqrt(arrel)) / (2*a);
-        return 2; // Retorna 2 talls amb l'eix x
+        return 2;
     } 
     else if (arrel == 0) {
         *tall_x1 = -b / (2*a);
-        return 1; // Retorna 1 tall amb l'eix x
+        return 1;
     } 
     else {
-        return 0; // No hi ha tall amb l'eix x
+        return 0;
     }
 }
 
 int CalcularVertex(float a, float b, float c, float *vertex_x, float *vertex_y) {
-    *vertex_x = -b / (2*a);
-    *vertex_y = a*(*vertex_x)*(*vertex_x) + b*(*vertex_x) + c;
-    return 0; // Retorna 0 per indicar que s'ha calculat correctament
+    
+    if (a == 0.0f) {
+        return -1; // Una funció de primer grau no té vèrtex
+    }
+
+    *vertex_x = -b / (2 * a);
+    *vertex_y = a * (*vertex_x) * (*vertex_x)
+              + b * (*vertex_x)
+              + c;
+
+    return 0; // Càlcul correcte
 }
 

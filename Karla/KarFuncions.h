@@ -1,14 +1,9 @@
-#include <stdio.h>   // fgets() i printf()
-#include <stdlib.h>  // strtof()
-#include <string.h>  // strchr()
-#include <math.h>
+#ifndef CALCULADORA_H
+#define CALCULADORA_H
 
-int main() { 
+int llegirCoficientsIGrau(float *a, float *b, float *c);
+float CalcularTallEixY(float a, float b, float c);
+float CalcularTallEixX(float a, float b, float c, float *tall_x1, float *tall_x2);
+int CalcularVertex(float a, float b, float c, float *vertex_x, float *vertex_y);
 
-char funcio[100];
-char primer_grau[100];
-char segon_grau[100];
-
-
-
-}
+#endif
